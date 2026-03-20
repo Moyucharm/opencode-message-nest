@@ -1,0 +1,13 @@
+{
+  // notify.milki.top 下发的 token
+  "token": "your-notify-token",
+
+  // 可选，默认就是 notify.milki.top 的发送接口
+  "apiUrl": "https://notify.milki.top/api/v2/message/send",
+
+  // 可选，通知标题里的后缀
+  "title": "OpenCode",
+
+  // 可选，超过这个长度会被截断
+  "previewLimit": 30
+}

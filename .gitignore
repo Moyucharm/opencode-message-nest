@@ -3,3 +3,7 @@ node_modules/
 .env.*
 *.log
 .DS_Store
+.opencode-notify.json
+.opencode-notify.jsonc
+opencode-notify.config.json
+opencode-notify.config.jsonc

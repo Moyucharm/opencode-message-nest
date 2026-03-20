@@ -9,7 +9,8 @@
   "files": [
     "index.mjs",
     "README.md",
-    "opencode.example.jsonc"
+    "opencode.example.jsonc",
+    "opencode-notify.config.example.jsonc"
   ],
   "scripts": {
     "check": "node --input-type=module -e \"import('./index.mjs').then(() => console.log('ok'))\""
