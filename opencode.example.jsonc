@@ -1,0 +1,6 @@
+{
+  // 如果你已经有 plugin 数组，请把这一项追加进去，不要整段替换。
+  "plugin": [
+    "file:///ABSOLUTE/PATH/TO/opencode-notify/index.mjs"
+  ]
+}

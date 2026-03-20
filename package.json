@@ -1,0 +1,23 @@
+{
+  "name": "opencode-notify",
+  "version": "0.1.0",
+  "description": "Remote notification plugin for OpenCode via notify.milki.top",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "index.mjs",
+    "README.md",
+    "opencode.example.jsonc"
+  ],
+  "scripts": {
+    "check": "node --input-type=module -e \"import('./index.mjs').then(() => console.log('ok'))\""
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "notify",
+    "notifications"
+  ]
+}
