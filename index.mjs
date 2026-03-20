@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { basename, isAbsolute, join, resolve } from "node:path";
 
-const DEFAULT_API_URL = "https://notify.milki.top/api/v2/message/send";
 const DEFAULT_TITLE = "OpenCode";
 const DEFAULT_PREVIEW_LIMIT = 30;
 const REQUEST_TIMEOUT_MS = 10000;
@@ -23,6 +22,7 @@ const latestTextBySession = new Map();
 const lastCompletedPreviewBySession = new Map();
 
 let missingTokenWarned = false;
+let missingApiUrlWarned = false;
 const warnedConfigPaths = new Set();
 
 function normalizeText(value) {
@@ -317,7 +317,7 @@ async function loadConfig(projectDirectory) {
 
   let config = {
     token: "",
-    apiUrl: DEFAULT_API_URL,
+    apiUrl: "",
     title: DEFAULT_TITLE,
     previewLimit: DEFAULT_PREVIEW_LIMIT,
   };
@@ -342,7 +342,18 @@ function warnMissingToken() {
 
   missingTokenWarned = true;
   console.warn(
-    "[opencode-notify] OPENCODE_NOTIFY_TOKEN is missing; notifications are disabled.",
+    "[opencode-notify] notify token is missing; notifications are disabled.",
+  );
+}
+
+function warnMissingApiUrl() {
+  if (missingApiUrlWarned) {
+    return;
+  }
+
+  missingApiUrlWarned = true;
+  console.warn(
+    "[opencode-notify] notify apiUrl is missing; notifications are disabled.",
   );
 }
 
@@ -371,6 +382,11 @@ async function postJson(url, payload) {
 async function sendNotification(projectName, config, label, detail) {
   if (!config.token) {
     warnMissingToken();
+    return;
+  }
+
+  if (!config.apiUrl) {
+    warnMissingApiUrl();
     return;
   }
 

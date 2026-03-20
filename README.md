@@ -1,6 +1,6 @@
 # opencode-notify
 
-把 OpenCode 的关键事件推送到 `notify.milki.top`，包括提问、权限申请、报错和回复完成。
+把 OpenCode 的关键事件推送到你自己的通知服务，包括提问、权限申请、报错和回复完成。
 
 现在插件已经支持通过独立配置文件保存 `token`、`apiUrl`、`title` 和 `previewLimit`，不一定要再放环境变量里。
 
@@ -17,7 +17,7 @@
 
 - 支持插件加载的 OpenCode
 - Node.js 20+
-- `notify.milki.top` 的有效 token
+- 一个可用的通知服务接口与 token
 
 ## 安装步骤
 
@@ -41,7 +41,7 @@
 ```jsonc
 {
   "token": "your-notify-token",
-  "apiUrl": "https://notify.milki.top/api/v2/message/send",
+  "apiUrl": "https://your-notify-host.example.com/api/v2/message/send",
   "title": "OpenCode",
   "previewLimit": 30
 }
@@ -61,10 +61,10 @@
 export OPENCODE_NOTIFY_TOKEN="你的通知 token"
 ```
 
-如果你需要覆盖默认值，可以继续设置这些环境变量：
+如果你需要通过环境变量覆盖配置文件，可以继续设置这些环境变量：
 
 ```bash
-export OPENCODE_NOTIFY_API_URL="https://notify.milki.top/api/v2/message/send"
+export OPENCODE_NOTIFY_API_URL="https://your-notify-host.example.com/api/v2/message/send"
 export OPENCODE_NOTIFY_TITLE="OpenCode"
 export OPENCODE_NOTIFY_PREVIEW_LIMIT="30"
 ```
@@ -96,8 +96,8 @@ opencode debug config
 
 | 字段 | 必填 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `token` / `OPENCODE_NOTIFY_TOKEN` | 是 | - | `notify.milki.top` 提供的 token |
-| `apiUrl` / `OPENCODE_NOTIFY_API_URL` | 否 | `https://notify.milki.top/api/v2/message/send` | 通知 API 地址 |
+| `token` / `OPENCODE_NOTIFY_TOKEN` | 是 | - | 通知服务使用的 token |
+| `apiUrl` / `OPENCODE_NOTIFY_API_URL` | 是 | - | 通知 API 地址 |
 | `title` / `OPENCODE_NOTIFY_TITLE` | 否 | `OpenCode` | 通知标题后缀 |
 | `previewLimit` / `OPENCODE_NOTIFY_PREVIEW_LIMIT` | 否 | `30` | 预览文本最大长度 |
 
@@ -118,6 +118,7 @@ npm run check
 ## 安全说明
 
 - 不要把真实 token 提交到仓库里。
+- 不要把真实通知服务域名、token 或内部接口地址写进公开文档。
 - 如果使用配置文件，请把它放在 `~/.config/opencode/` 或项目本地并加入忽略规则。
 - 如果不想落盘，请继续使用 `OPENCODE_NOTIFY_TOKEN` 环境变量。
 - 如果 token 泄漏，请先轮换再继续使用本仓库。

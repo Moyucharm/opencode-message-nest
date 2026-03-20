@@ -1,7 +1,7 @@
 {
   "name": "opencode-notify",
   "version": "0.1.0",
-  "description": "Remote notification plugin for OpenCode via notify.milki.top",
+  "description": "Remote notification plugin for OpenCode with file-based settings",
   "type": "module",
   "engines": {
     "node": ">=20"
